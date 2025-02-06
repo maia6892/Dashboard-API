@@ -1,0 +1,36 @@
+networks:
+  dev:
+    driver: bridge
+
+services:
+  dashboard-app:
+    image: maia6892/dashboardapp:v1
+    depends_on:
+      - "dashboard_db"
+    container_name: dashboardapp-api
+    ports:
+      - "8088:80"
+    build:
+      context: .
+    environment:
+      DATABASE_URL: "postgres://postgres:postgres@dashboard_db:5432/DashboardDB"
+    networks:
+      - dev
+
+  dashboard_db:
+    image: postgres:latest
+    container_name: dashboard_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=DashboardDB
+    ports:
+      - "5433:5432"
+    restart: always
+    volumes:
+      - dashboard_data:/var/lib/postgresql/data
+    networks:
+      - dev
+
+volumes:
+  dashboard_data:

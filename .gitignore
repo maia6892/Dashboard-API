@@ -1,0 +1,17 @@
+bin/
+obj/
+*.suo
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+*.user
+*.bak
+*.tmp
+*.log
+_ReSharper.*
+Uploads/
+*.http
+appsettings.Development.json
+docker-compose.override.yml
+appsettings.json
+.DS_Store
