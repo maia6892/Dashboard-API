@@ -59,7 +59,7 @@ namespace DashboardAPI.Controllers
         {
             var quickRewiew = new QuickReviewBottomDto()
             {
-                TotalOrdersCompleted =await context.DishOrders.Where(d => d.OrderDate.Month == thisMonth && d.Restaurant.Id == restaurantId && d.Status.Status == "Completed").CountAsync(),
+                TotalOrdersCompleted = await context.DishOrders.Where(d => d.OrderDate.Month == thisMonth && d.Restaurant.Id == restaurantId && d.Status.Status == "Completed").CountAsync(),
                 TotalOrdersDelivered = await context.DishOrders.Where(d => d.OrderDate.Month == thisMonth && d.Restaurant.Id == restaurantId && d.Status.Status == "Delivered").CountAsync(),
                 TotalOrdersCanceled = await context.DishOrders.Where(d => d.OrderDate.Month == thisMonth && d.Restaurant.Id == restaurantId && d.Status.Status == "Canceled").CountAsync(),
                 TotalOrdersPending = await context.DishOrders.Where(d => d.OrderDate.Month == thisMonth && d.Restaurant.Id == restaurantId && d.Status.Status == "On Process").CountAsync()
@@ -377,5 +377,7 @@ namespace DashboardAPI.Controllers
 
             return File(System.Text.Encoding.UTF8.GetBytes(csvContent), "text/csv", fileName);
         }
+
+        
     }
 }

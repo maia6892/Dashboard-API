@@ -9,7 +9,6 @@ obj/
 *.tmp
 *.log
 _ReSharper.*
-Uploads/
 *.http
 appsettings.Development.json
 docker-compose.override.yml

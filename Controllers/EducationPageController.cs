@@ -125,7 +125,7 @@ public class EducationPageController(DashboardDbContext context) : ControllerBas
             .Include(t => t.Progress)
             .Include(t => t.Subject)
             .Where(t => t.Progress.Progress == "In Progress" && t.HighPriority == false)
-            .Take(5)
+            .OrderBy(t => t.Id)
             .ToListAsync();
 
         if (tasks == null || !tasks.Any())
@@ -135,6 +135,7 @@ public class EducationPageController(DashboardDbContext context) : ControllerBas
 
         var tasksList = tasks.Select(t => new TasksDto
         {
+            Id = t.Id,
             Title = t.Title,
             Subject = t.Subject.Name
         }).ToList();

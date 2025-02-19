@@ -4,7 +4,7 @@ networks:
 
 services:
   dashboard-app:
-    image: maia6892/dashboardapp:v1
+    image: docker.io/library/dashboardapp:v2
     depends_on:
       - "dashboard_db"
     container_name: dashboardapp-api
@@ -12,8 +12,11 @@ services:
       - "8088:80"
     build:
       context: .
+      dockerfile: Dockerfile
     environment:
-      DATABASE_URL: "postgres://postgres:postgres@dashboard_db:5432/DashboardDB"
+      - ConnectionStrings__Default=User ID=postgres;Password=postgres;Server=dashboard_db;Port=5432;Database=DashboardDB;
+      - ConnectionStrings__Identity=User ID=postgres;Password=postgres;Server=dashboard_db;Port=5432;Database=DashboardIdentityDB;
+      - ASPNETCORE_URLS=http://+:80
     networks:
       - dev
 
